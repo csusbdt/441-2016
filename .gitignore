@@ -1,0 +1,5 @@
+/build
+/working/a.out
+xcuserdata
+*.h.gch
+.DS_Store
