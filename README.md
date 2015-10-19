@@ -15,14 +15,12 @@ The project contains the following files.
 
 ## Makefile
 
-make              Build for testing osx.
-make test         Run tests.
-make clean        Delete generated files.
+    make osx          Build for testing on OS X and Linux.
+    make test         Build and run OS X and Linux.
+    make pkg          Build package installer for OS X.
+    make clean        Delete generated files.
 
 ### Windows
-
-TODO: Add instructions for Windows build so that source code for dependencies 
-can be omitted from repo.
 
 TODO: There is a build script that needs to looked at and maybe get working.
 Otherwise, describe how to create a Visual Studio project to build the code.
@@ -68,16 +66,13 @@ to the file system.  When the savefile module is loaded,
 it reads in the key-value entries that were previously 
 saved into the filesystem.
 
-
-TODO: check the following descriptions for correctness.
-
 ## Textures
 
 There are 2 ways to create textures directly: load from an image file or create 
 from a font. You can also create textures indirectly by creating buttons. In either 
 case, you need to first obtain a reference to the textures module as follows.
 
-    textures = require('base.textures')
+    textures = require('res.textures')
 
 To load an image, call the image function of the textures module as follows.
 
@@ -111,7 +106,7 @@ future, then force garbage collection as follows.
 
 Fonts are loaded through the fonts module.  Obtain a reference to this module as follows.
 
-    fonts = require('base.fonts')
+    fonts = require('res.fonts')
 
 The fonts module exports a single function named 'get', which is used as follows to obtain
 references to loaded fonts.
@@ -136,6 +131,50 @@ Font instances are used in the following functions.
 If font is omitted in a call to Button.create_from_text, then the "button" font is used.
 For this reason a button font should always be included in fontspecs.
 
+## Buttons
+
+In this project, a button is a gui primitive that can be used for the following purposes.
+
+- Render an image
+- Render a single line of text
+- Define a clickable region
+
+Button instances are created from the following functions exported by the button module.
+
+                function                |     description
+--------------------------------------- | -----------------------------------------
+create_from_texture(t, x, y, w, h)      | create button from an existing texture
+create_from_image(filename, x, y, w, h) | create button from image
+create_from_text(text, x, y, font)      | create button from text using given font
+
+Examples:
+
+    Button   = require('res.Button')
+    stop_btn = Button.create_from_text("Stop", 100, 160)
+    tree_btn = Button.create_from_image("images/tree.bmp", 200, 50)
+
+
+A button instance is a table that contains the following keys:
+
+key | value
+--- | -----
+ t  | the texture to render 
+ x  | the x coordinate of the button
+ y  | the y coordinate of the button
+ w  | the width of the button
+ h  | the height of the button
+
+A metatable provides the following functions to buttons.
+
+   function    |    description
+-------------- | -----------------
+draw()         | Draw the button at its x,y coordinate.
+contains(x, y) | Returns true if (x, y) are inside the button.
+
+Examples:
+
+    stop_btn:draw()
+    if stop_btn:contains(x, y) then quit() end
 
 ## Sound effects (and small music)
 
@@ -149,7 +188,7 @@ Sound data is in wave format and stored under a folder named 'waves'. To play a 
 get a wave object from the waves module and then call its play function.  (Use the colon operator
 to call the wave's play function.)
 
-    waves = require('eng.waves')
+    waves = require('res.waves')
     door = waves.get('waves/door.wav')
     door:play()
 
