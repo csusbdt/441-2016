@@ -25,9 +25,9 @@ The project contains the following files.
 TODO: There is a build script that needs to looked at and maybe get working.
 Otherwise, describe how to create a Visual Studio project to build the code.
 
-## The base scripts
+## The resource scripts
 
-Under working, there is a folder of _base_ scripts that provide
+Under working, there is a folder of scripts (_res_) that provide
 generic functionality to the program.  These are described as follows.
 
 The textures module lets you create textures in 2 ways:
