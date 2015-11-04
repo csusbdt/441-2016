@@ -7,6 +7,7 @@ local sf        = require('res.savefile')
 
 local bg
 local title
+local anim_button
 local continue_button
 local restart_button
 local textures_button
@@ -35,6 +36,7 @@ end
 local function load_textures()
 	bg = textures.image('bg/schoolFiller.jpg')
 	title           = create_title ("CSE 441 Test Program", 120,  50)
+	anim_button     = create_button("Animation test"      , x, y); y = y + dy
 	continue_button = create_button("Continue game"       , x, y); y = y + dy
 	restart_button  = create_button("Restart game"        , x, y); y = y + dy
 	textures_button = create_button("Textures demo"       , x, y); y = y + dy
@@ -50,6 +52,7 @@ local function draw()
 	render_clear()
 	bg              :draw()
 	title           :draw()
+	anim_button     :draw()
 	continue_button :draw()
 	restart_button  :draw()
 	textures_button :draw()
@@ -68,6 +71,8 @@ function on_touch(x, y)
 	if continue_button:contains(x, y) then
 		sounds.play('waves/door.wav')
 		dofile('screens/play.lua')
+	elseif anim_button:contains(x, y) then
+		dofile('screens/anim.lua')
 	elseif restart_button:contains(x, y) then
 		sf.clear()
 		sf.current_node = 'start'

@@ -5,6 +5,7 @@
 #	test	test on OS X
 #	pkg	build OS X installer for app
 
+.PHONY : targets
 .PHONY : clean
 .PHONY : osx
 .PHONY : test
@@ -12,7 +13,15 @@
 
 SDL_FLAGS := $(shell sdl2-config --libs --cflags)
 
-default : test
+default : targets
+
+targets :
+	@echo " "
+	@echo "clean   delete generated files"
+	@echo "osx     build for testing on OS X"
+	@echo "test    test on OS X"
+	@echo "pkg     build OS X installer for app"
+	@echo " "
 
 clean :
 	rm -f  working/a.out

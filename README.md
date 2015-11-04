@@ -102,6 +102,23 @@ future, then force garbage collection as follows.
 
     collectgarbage()
 
+You can draw a texture in the following ways:
+
+    Scale to fill entire screen:
+	ima:draw() 
+
+    Draw at given location: 
+	ima:draw(dst_x, dst_y) 
+
+    Scale to given width and height:
+	ima:draw(dst_x, dst_y, dst_w, dst_h) 
+
+    Draw a subregion:
+	ima:draw(src_x, src_y, src_w, src_h, dst_x, dst_y) 
+
+    Draw at given location:
+	ima:draw(src_x, src_y, src_w, src_h, dst_x, dst_y, dst_w, dst_h) 
+
 ## Fonts
 
 Fonts are loaded through the fonts module.  Obtain a reference to this module as follows.

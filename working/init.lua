@@ -26,4 +26,5 @@ dofile('tests/screen.lua')
 --]]
 
 dofile('screens/title.lua')
+--dofile('screens/anim.lua')
 
