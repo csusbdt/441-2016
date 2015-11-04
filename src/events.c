@@ -79,6 +79,18 @@ static void on_key_down(lua_State * L, const SDL_KeyboardEvent * e) {
 	if (lua_pcall(L, 1, 0, 0)) fatal(lua_tostring(L, -1));
 }
 
+static void on_key_up(lua_State * L, const SDL_KeyboardEvent * e) {
+	SDL_assert(lua_gettop(L) == 0);
+	lua_getglobal(L, "on_keyup");
+	SDL_assert(lua_gettop(L) == 1);
+	if (lua_isnil(L, 1)) {
+		lua_settop(L, 0);
+		return;
+	}
+	lua_pushinteger(L, e->keysym.sym);
+	if (lua_pcall(L, 1, 0, 0)) fatal(lua_tostring(L, -1));
+}
+
 static void on_window_event(lua_State * L, Uint8 id) {
 	SDL_assert(lua_gettop(L) == 0);
 	if (id == SDL_WINDOWEVENT_EXPOSED) {
@@ -112,6 +124,7 @@ bool process_event_queue(lua_State * L) {
 		if      (e.type == SDL_QUIT)               { on_window_closing(L);  return false; } 
 		else if (e.type == SDL_MOUSEBUTTONDOWN)      on_mouse_down(L, &e.button);
 		else if (e.type == SDL_KEYDOWN)              on_key_down(L, &e.key);
+		else if (e.type == SDL_KEYUP)                on_key_up(L, &e.key);
 		else if (e.type == SDL_WINDOWEVENT)          on_window_event(L, e.window.event);
 		else if (e.type == SDL_RENDER_TARGETS_RESET) on_render_targets_reset(L);
 	}

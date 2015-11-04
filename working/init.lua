@@ -18,6 +18,25 @@ print('resource_dir = ' .. resource_dir)
 print('save_dir = ' .. save_dir)
 print('path_separator = ' .. path_separator)
 
+w_key_down = false
+a_key_down = false
+s_key_down = false
+d_key_down = false
+
+function on_keydown(key)
+        if     key == 119 then w_key_down = true
+        elseif key ==  97 then a_key_down = true
+        elseif key == 115 then s_key_down = true
+        elseif key == 100 then d_key_down = true end
+end
+
+function on_keyup(key)
+        if     key == 119 then w_key_down = false
+        elseif key ==  97 then a_key_down = false
+        elseif key == 115 then s_key_down = false
+        elseif key == 100 then d_key_down = false end
+end
+
 --[[
 dofile('tests/fonts.lua')
 dofile('tests/textures.lua')
