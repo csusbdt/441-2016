@@ -1,5 +1,6 @@
 local textures  = require('res.textures')
 local anims     = require('res.anims')
+local input     = require('res.input')
 
 local x = 100
 local y = 100
@@ -56,10 +57,10 @@ end
 function on_update()
 	local dx = 0
 	local dy = 0
-	if w_key_down and not s_key_down then dy = -y_speed end
-	if s_key_down and not w_key_down then dy =  y_speed end
-	if a_key_down and not d_key_down then dx = -x_speed end
-	if d_key_down and not a_key_down then dx =  x_speed end
+	if input.is_w_key_down() and not input.is_s_key_down() then dy = -y_speed end
+	if input.is_s_key_down() and not input.is_w_key_down() then dy =  y_speed end
+	if input.is_a_key_down() and not input.is_d_key_down() then dx = -x_speed end
+	if input.is_d_key_down() and not input.is_a_key_down() then dx =  x_speed end
 	if dx == 0 and dy == 0 then
 		if     anim == walkleft  then anim = idleleft 
 		elseif anim == walkright then anim = idleright
