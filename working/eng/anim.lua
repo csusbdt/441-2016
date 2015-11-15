@@ -6,7 +6,7 @@ local frame_mt = {
 	y = 0,
 	w = 64,
 	h = 64,
-	ticks = 10
+	t = 10 -- ticks
 }
 frame_mt.__index = frame_mt
 function frame_mt:draw(x, y)
@@ -32,13 +32,13 @@ end
 
 function anim_mt:loop()
 	local frame = 1
-	local ticks = self.frames[frame].ticks
+	local ticks = self.frames[frame].t
 	return function(x, y)
 		ticks = ticks - 1
 		if ticks < 1 then 
 			frame = frame + 1
 			if frame > #self.frames then frame = 1 end
-			ticks = self.frames[frame].ticks
+			ticks = self.frames[frame].t
 		end
 		self.frames[frame]:draw(x, y)
 	end

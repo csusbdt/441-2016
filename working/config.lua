@@ -14,7 +14,7 @@ window_height = 600
 
 app_title = 'Test Program'
 app_fullscreen = false
-app_millis_per_update = math.floor(1000 / 66)
+app_millis_per_update = 17
 app_save_folder_parent = 'cse441'
 app_save_folder = 'test'
 

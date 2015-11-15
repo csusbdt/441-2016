@@ -14,6 +14,10 @@ function on_window_size_changed()
 	if on_render_targets_reset then on_render_targets_reset() end
 end
 
+function on_render_targets_reset()
+	if draw then draw() end
+end
+
 print('resource_dir = ' .. resource_dir)
 print('save_dir = ' .. save_dir)
 print('path_separator = ' .. path_separator)
