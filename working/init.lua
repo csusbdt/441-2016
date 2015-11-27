@@ -29,6 +29,6 @@ dofile('tests/audio.lua')
 dofile('tests/screen.lua')
 --]]
 
-dofile('screens/title.lua')
---dofile('screens/room.lua')
+--dofile('screens/title.lua')
+dofile('screens/room.lua')
 
